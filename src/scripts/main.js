@@ -162,24 +162,68 @@ const students = [{
 //     }
 // }
 
-//********************************************************************************** */
+//**********************************************************************************
 
 // Practice: One Object to Rule Them All
 // Instead of defining four arguments for the createStudentComponent function, and then passing the individual properties when it is invoked, refactor the function to accept the entire object as a single argument.
 
 // Then refactor your string interpolation code to use the object properties.
 
+// const createStudentComponent = (student) => {
+//     if (student.score >= 60) { 
+//         status = "passing"
+//     } else {
+//         status = "failing"
+//     };
+//         return `
+//         <div class="student">
+//             <h1 class="xx-large ${status}">${student.name}</h1>
+//             <section class="bordered dashed section--padded">${student.subject}</section>
+//             <aside>${student.info}</aside>
+//         </div>
+//     `
+// }
+
+// const studentContainer = document.querySelector("#container")
+
+
+// for (let i = 0; i < students.length; i++) {
+//     studentContainer.innerHTML += createStudentComponent(students[i])
+// }
+
+// *****************************************************************
+// Challenge: Composition of Smaller Components
+// Write functions that build the sub-components of the larger student component.
+
+// h1
+// section
+// aside
+// Invoke those functions inside the createStudentComponent function to build the parent <div>.
+
+// const createStudentComponent = (student) => `
+//     <div id="student">
+//         ${h1(student.name)}
+//         ${section(student.subject)}
+//         ${aside(student.info)}
+//     </div>
+// `
+
+const h1 = (status, name) => `<h1 class="xx-large ${status}">${name}</h1>`;
+const section = (subject) => `<section class="bordered dashed section--padded">${subject}</section>`;
+const aside = (info) => `<aside>${info}</aside>`;
+
 const createStudentComponent = (student) => {
-    if (student.score >= 60) { 
+    let status;
+    if (student.score >= 60) {
         status = "passing"
     } else {
         status = "failing"
     };
-        return `
+    return `
         <div class="student">
-            <h1 class="xx-large ${status}">${student.name}</h1>
-            <section class="bordered dashed section--padded">${student.subject}</section>
-            <aside>${student.info}</aside>
+         ${h1(status, student.name)}
+         ${section(student.subject)} 
+         ${aside(student.info)}
         </div>
     `
 }
