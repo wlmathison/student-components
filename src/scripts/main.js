@@ -130,12 +130,56 @@ const students = [{
     }
 ]
 
-const createStudentComponent = (name, subject, info, score) => {
-    return `
+// const createStudentComponent = (name, subject, info, score) => {
+//     return `
+//         <div class="student">
+//             <h1 class="xx-large ${score}">${name}</h1>
+//             <section class="bordered dashed section--padded">${subject}</section>
+//             <aside>${info}</aside>
+//         </div>
+//     `
+// }
+
+// const studentContainer = document.querySelector("#container")
+
+
+// for (let i = 0; i < students.length; i++) {
+//     const student = students[i]
+//     if (student.score >= 60) {
+//         studentContainer.innerHTML += createStudentComponent(
+//             student.name,
+//             student.subject,
+//             student.info,
+//             "passing"
+//         )
+//     } else {
+//         studentContainer.innerHTML += createStudentComponent(
+//             student.name,
+//             student.subject,
+//             student.info,
+//             "failing"
+//         )
+//     }
+// }
+
+//********************************************************************************** */
+
+// Practice: One Object to Rule Them All
+// Instead of defining four arguments for the createStudentComponent function, and then passing the individual properties when it is invoked, refactor the function to accept the entire object as a single argument.
+
+// Then refactor your string interpolation code to use the object properties.
+
+const createStudentComponent = (student) => {
+    if (student.score >= 60) { 
+        status = "passing"
+    } else {
+        status = "failing"
+    };
+        return `
         <div class="student">
-            <h1 class="xx-large ${score}">${name}</h1>
-            <section class="bordered dashed section--padded">${subject}</section>
-            <aside>${info}</aside>
+            <h1 class="xx-large ${status}">${student.name}</h1>
+            <section class="bordered dashed section--padded">${student.subject}</section>
+            <aside>${student.info}</aside>
         </div>
     `
 }
@@ -144,22 +188,5 @@ const studentContainer = document.querySelector("#container")
 
 
 for (let i = 0; i < students.length; i++) {
-    const student = students[i]
-    if (student.score >= 60) {
-        studentContainer.innerHTML += createStudentComponent(
-            student.name,
-            student.subject,
-            student.info,
-            "passing"
-        )
-    } else {
-        studentContainer.innerHTML += createStudentComponent(
-            student.name,
-            student.subject,
-            student.info,
-            "failing"
-        )
-    }
-
+    studentContainer.innerHTML += createStudentComponent(students[i])
 }
-
