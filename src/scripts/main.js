@@ -208,28 +208,75 @@ const students = [{
 //     </div>
 // `
 
-const h1 = (status, name) => `<h1 class="xx-large ${status}">${name}</h1>`;
-const section = (subject) => `<section class="bordered dashed section--padded">${subject}</section>`;
-const aside = (info) => `<aside>${info}</aside>`;
+// const h1 = (name, status) => `<h1 class="xx-large ${status}">${name}</h1>`;
+// const section = (subject) => `<section class="bordered dashed section--padded">${subject}</section>`;
+// const aside = (info) => `<aside>${info}</aside>`;
+
+// const createStudentComponent = (student) => {
+//     let status;
+//     if (student.score >= 60) {
+//         status = "passing"
+//     } else {
+//         status = "failing"
+//     };
+//     return `
+//         <div class="student">
+//          ${h1(student.name, status)}
+//          ${section(student.subject)} 
+//          ${aside(student.info)}
+//         </div>
+//     `
+// }
+
+// const studentContainer = document.querySelector("#container")
+
+
+// for (let i = 0; i < students.length; i++) {
+//     studentContainer.innerHTML += createStudentComponent(students[i])
+// }
+
+// ***********************************************************************
+// Challenge: Generic HTML Function
+// Look at the three functions you created to build an h1, a section, and an aside. Notice that each one follows the same pattern of accepting a single argument - a string - and outputting a single HTML component. Since there is a pattern, you can consider writing a single function that generalizes the creation of an HTML component even further.
+
+// Create one function that will generate any HTML component, with any content. It should be defined with three arguments.
+
+// The type of HTML component to make
+// The content of the component
+// The value of the class attribute
+// const createStudentComponent = (student) => `
+//     <div id="student">
+//         ${element("h1", student.name, "xx-large passing")}
+//         ${element("section", student.subject, "bordered dashed section--padded")}
+//         ${element("aside", student.info, "pushRight")}
+//     </div>
+// `
+
+const element = (tag, input, classNames) => {
+   return `<${tag} class="${classNames}">${input}</${tag}>`;
+}
 
 const createStudentComponent = (student) => {
-    let status;
     if (student.score >= 60) {
-        status = "passing"
+        return `
+    <div id="student">
+        ${element("h1", student.name,"xx-large passing")}
+        ${element("section", student.subject, "bordered dashed section--padded")}
+        ${element("aside", student.info, "pushRight")}
+    </div>
+`
     } else {
-        status = "failing"
+        return `
+    <div id="student">
+        ${element("h1", student.name, "xx-large failing")}
+        ${element("section", student.subject, "bordered dashed section--padded")}
+        ${element("aside", student.info, "pushRight")}
+    </div>
+`
     };
-    return `
-        <div class="student">
-         ${h1(status, student.name)}
-         ${section(student.subject)} 
-         ${aside(student.info)}
-        </div>
-    `
 }
 
 const studentContainer = document.querySelector("#container")
-
 
 for (let i = 0; i < students.length; i++) {
     studentContainer.innerHTML += createStudentComponent(students[i])
